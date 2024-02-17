@@ -14,5 +14,8 @@ module.exports = {
       },
     },
   },
+  images: {
+    domains: ["localhost"],
+  },
   plugins: [],
 };
