@@ -1,40 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import LoadingLayanan from "./elements/LoadingLayanan";
-// const LayananList = [
-//   {
-//     id: 1,
-//     title: "Pembuatan PT",
-//     description:
-//       "Bagi anda yang ingin badan usaha dengan struktur kepemilikanan tttttttttttttttttttttttt gsssssssssffffffefcef",
-//     image: "/images/example.jpg",
-//   },
-//   {
-//     id: 2,
-//     title: "Pembuatan PT",
-//     description:
-//       "Bagi anda yang ingin badan usaha dengan struktur kepemilikanan tttttttttttttttttttttttt gsssssssssffffffefcef",
-//     image: "/images/example.jpg",
-//   },
-//   {
-//     id: 3,
-//     title: "Pembuatan PT",
-//     description:
-//       "Bagi anda yang ingin badan usaha dengan struktur kepemilikanan tttttttttttttttttttttttt gsssssssssffffffefcef",
-//     image: "/images/example.jpg",
-//   },
-//   {
-//     id: 4,
-//     title: "Pembuatan PT",
-//     description:
-//       "Bagi anda yang ingin badan usaha dengan struktur kepemilikanan tttttttttttttttttttttttt gsssssssssffffffefcef",
-//     image: "/images/example.jpg",
-//   },
-// ];
+
 export default function Layanan() {
   const [Layanan, setLayanan] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,7 +11,7 @@ export default function Layanan() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/layanan");
-        setLayanan(response.data.data);
+        setLayanan(response.data.data.data);
       } catch (error) {
         console.error("Error fetching data layanan:", error);
         setError(error);
@@ -86,17 +54,17 @@ export default function Layanan() {
       <div className="relative flex flex-col items-center justify-center lg:px-28">
         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 xl:grid-cols-2">
           {Layanan.slice(0, 4).map((item) => (
-            <div className="flex flex-col" key={item.type.id}>
+            <div className="flex flex-col" key={item.id}>
               <div className="p-4 bg-white shadow-md rounded-3xl">
                 <div className="flex-none lg:flex">
                   <div className="w-full h-full mb-3 lg:h-48 lg:w-48 lg:mb-0">
-                    {/* <Image
-                      src={item.attributes.gambar}
+                    <img
+                      src={item.attributes.urlGambar}
                       alt="Just a flower"
-                      className="object-scale-down w-full lg:object-cover lg:h-48 rounded-2xl"
                       width={200}
                       height={200}
-                    /> */}
+                      className="object-scale-down w-full rounded-2xl lg:object-cover lg:h-48"
+                    />
                   </div>
                   <div className="flex-auto py-2 ml-3 justify-evenly">
                     <div className="flex flex-wrap ">

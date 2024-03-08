@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "react-loading-skeleton/dist/skeleton.css";
 import Link from "next/link";
 import LoadingLayanan from "@/components/elements/LoadingLayanan";
-import Image from "next/image";
 
 export default function Layanan() {
-  const [Layanan, setLayanan] = useState([]);
+  const [layanan, setLayanan] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 10; // Jumlah item per halaman
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/layanan");
-        setLayanan(response.data.data);
+        const response = await axios.get(
+          `http://localhost:5000/api/layanan?page=${currentPage}&pageSize=${pageSize}`
+        );
+        setLayanan(response.data.data.data);
+        setTotalPages(response.data.totalPages);
       } catch (error) {
         console.error("Error fetching data layanan:", error);
         setError(error);
@@ -24,7 +28,8 @@ export default function Layanan() {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
+
   if (error) {
     return (
       <div className="text-center text-red-500">Error: {error.message}</div>
@@ -37,7 +42,7 @@ export default function Layanan() {
       <>
         <div className="relative flex flex-col items-center justify-center lg:px-28">
           <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 xl:grid-cols-2">
-            {Array.from({ length: 8 }).map((_, index) => (
+            {Array.from({ length: pageSize }).map((_, index) => (
               <LoadingLayanan key={index} />
             ))}
           </div>
@@ -45,6 +50,9 @@ export default function Layanan() {
       </>
     );
   }
+
+  // Menghitung angka pertama yang akan ditampilkan dalam navigasi paginasi
+  const firstPage = Math.max(1, currentPage - 4);
 
   return (
     <>
@@ -55,19 +63,18 @@ export default function Layanan() {
       </div>
       <div className="relative flex flex-col items-center justify-center lg:px-28">
         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 xl:grid-cols-2">
-          {Layanan.map((item) => (
+          {layanan.map((item) => (
             <div className="flex flex-col" key={item.id}>
               <div className="p-4 bg-white shadow-md rounded-3xl">
                 <div className="flex-none lg:flex">
                   <div className="w-full h-full mb-3 lg:h-48 lg:w-48 lg:mb-0">
-                    {item.attributes.gambar && (
-                      <Image
-                        src={item.attributes.gambar}
-                        alt={item.attributes.nama}
-                        width={200}
-                        height={200}
-                      />
-                    )}
+                    <img
+                      src={item.attributes.urlGambar}
+                      alt={item.attributes.nama}
+                      width={200}
+                      height={200}
+                      className="object-scale-down w-full rounded-2xl lg:object-cover lg:h-48"
+                    />
                   </div>
                   <div className="flex-auto py-2 ml-3 justify-evenly">
                     <div className="flex flex-wrap ">
@@ -104,6 +111,45 @@ export default function Layanan() {
               </div>
             </div>
           ))}
+        </div>
+        {/* pagination */}
+        <div className="flex justify-center gap-5 my-4">
+          <button
+            onClick={() =>
+              setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
+            }
+            disabled={currentPage === 1}
+            className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-400"
+          >
+            Prev
+          </button>
+          <div className="flex">
+            {Array.from(
+              { length: Math.min(totalPages - firstPage + 1, 5) },
+              (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(firstPage + index)}
+                  className={`mx-1 px-3 py-1 rounded-md ${
+                    currentPage === firstPage + index
+                      ? "bg-[#A8CF45] text-white"
+                      : "bg-gray-200 hover:bg-gray-400"
+                  }`}
+                >
+                  {firstPage + index}
+                </button>
+              )
+            )}
+          </div>
+          <button
+            onClick={() =>
+              setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-400"
+          >
+            Next
+          </button>
         </div>
       </div>
     </>

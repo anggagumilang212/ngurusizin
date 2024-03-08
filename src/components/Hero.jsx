@@ -24,12 +24,6 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap items-center gap-2 S">
-            {/* <a
-              href=""
-              className="px-5 py-2 mt-5 text-white bg-[#A8CF45] rounded-3xl px2 text-semibold "
-            >
-              Lihat Layanan
-            </a> */}
             <Link
               href={"/layanan"}
               type="submit"
@@ -37,7 +31,7 @@ export default function Hero() {
             >
               Lihat Layanan
             </Link>
-            <a href="">
+            <Link href={""}>
               <Image
                 src="/images/instagram.svg"
                 alt="Instagram"
@@ -45,8 +39,8 @@ export default function Hero() {
                 height={10}
                 className="mt-5 lg:w-7"
               />
-            </a>
-            <a href="">
+            </Link>
+            <Link href={""}>
               <Image
                 src="/images/whatsapp.svg"
                 alt="Whatsapp"
@@ -54,8 +48,8 @@ export default function Hero() {
                 height={10}
                 className="mt-5 lg:w-7"
               />
-            </a>
-            <a href="">
+            </Link>
+            <Link href={""}>
               <Image
                 src="/images/tiktok.svg"
                 alt="tiktok"
@@ -63,8 +57,8 @@ export default function Hero() {
                 height={10}
                 className="mt-5 lg:w-7"
               />
-            </a>
-            <a href="">
+            </Link>
+            <Link href={""}>
               <Image
                 src="/images/youtube.svg"
                 alt="youtobe"
@@ -72,7 +66,7 @@ export default function Hero() {
                 height={10}
                 className="mt-5 lg:w-7"
               />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="relative flex flex-1 max-w-3xl mx-auto lg:w-1/2 lg:h-auto lg:max-w-none lg:mx-0">

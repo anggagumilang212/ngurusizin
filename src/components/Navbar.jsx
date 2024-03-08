@@ -17,7 +17,8 @@ export default function Navbar() {
         <div className="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
           <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div className="flex flex-row items-center justify-between p-4">
-              <Link
+              <h1 className="text-2xl font-bold">Ngurus Izin</h1>
+              {/* <Link
                 href={"/"}
                 className="text-lg font-semibold tracking-widest text-white uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
               >
@@ -27,7 +28,7 @@ export default function Navbar() {
                   width={100}
                   height={50}
                 />
-              </Link>
+              </Link> */}
               <button
                 onClick={toggleNavbar}
                 className="rounded-lg md:hidden focus:outline-none focus:shadow-outline"

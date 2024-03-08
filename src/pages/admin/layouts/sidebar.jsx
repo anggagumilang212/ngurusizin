@@ -3,10 +3,38 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import NotificationDropdown from "@/components/layoutsAdmin/NotificationDropdown";
 import UserDropdown from "@/components/layoutsAdmin/UserDropdown";
-
+import axios from "axios";
+import { useCookies } from "react-cookie";
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  const handleLogout = async () => {
+    try {
+      // Mendapatkan token JWT dari cookies
+      const token = cookies.token;
+
+      // Menyertakan token JWT dalam header Authorization
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      };
+
+      // Kirim permintaan logout dengan token JWT yang disertakan dalam header
+      await axios.post("http://localhost:5000/api/auth/logout", null, config);
+
+      // Hapus token JWT dari cookies setelah berhasil logout
+      setCookie("token", "", { path: "/" });
+
+      // Redirect ke halaman login setelah logout
+      router.push("/auth/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   return (
     <>
       <nav className="relative z-10 flex flex-wrap items-center justify-between px-6 py-4 bg-white shadow-xl md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden md:w-64">
@@ -24,7 +52,7 @@ export default function Sidebar() {
             href={"/"}
             className="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase md:block md:pb-2 text-blueGray-600 whitespace-nowrap"
           >
-            Izin Aja.id
+            Ngurus Izin
           </Link>
           {/* User */}
           {/* <ul className="flex flex-wrap items-center list-none md:hidden">
@@ -50,7 +78,7 @@ export default function Sidebar() {
                     href="/"
                     className="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase md:block md:pb-2 text-blueGray-600 whitespace-nowrap"
                   >
-                    Notus NextJS
+                    Ngurus Izin
                   </Link>
                 </div>
                 <div className="flex justify-end w-6/12">
@@ -78,9 +106,9 @@ export default function Sidebar() {
             {/* Divider */}
             {/* <hr className="my-4 md:min-w-full" /> */}
             {/* Heading */}
-            <h6 className="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-blueGray-500">
+            {/* <h6 className="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-blueGray-500">
               Admin Layout Pages
-            </h6>
+            </h6> */}
             {/* Navigation */}
 
             <ul className="flex flex-col list-none md:flex-col md:min-w-full">
@@ -90,7 +118,7 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (router.pathname.indexOf("/admin/dashboard") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
                 >
@@ -111,7 +139,7 @@ export default function Sidebar() {
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (router.pathname.indexOf("/admin/layanan") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
                 >
@@ -125,6 +153,100 @@ export default function Sidebar() {
                   ></i>{" "}
                   Layanan
                 </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  href={"/admin/order"}
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/order") !== -1
+                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-clipboard-list mr-2 text-sm " +
+                      (router.pathname.indexOf("/admin/order") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Order
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  href={"/admin/tentang"}
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/tentang") !== -1
+                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-address-card mr-2 text-sm " +
+                      (router.pathname.indexOf("/admin/tentang") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Tentang
+                </Link>
+              </li>
+              {/* <li className="items-center">
+                <Link
+                  href={"/admin/testimoni"}
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/testimoni") !== -1
+                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-comments mr-2 text-sm " +
+                      (router.pathname.indexOf("/admin/testimoni") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Testimoni
+                </Link>
+              </li> */}
+              <li className="items-center">
+                <Link
+                  href={"/admin/administrators"}
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/administrators") !== -1
+                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-users mr-2 text-sm " +
+                      (router.pathname.indexOf("/admin/administrators") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  administrators
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <button
+                  onClick={handleLogout}
+                  className="block py-3 text-xs font-bold uppercase "
+                >
+                  <i className="mr-2 text-sm fas fa-sign-out-alt "></i>
+                  logout
+                </button>
               </li>
             </ul>
 

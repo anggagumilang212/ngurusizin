@@ -11,7 +11,7 @@ export default function Tentang() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/tentang");
-        setTentang(response.data.data);
+        setTentang(response.data.data.data);
       } catch (error) {
         console.error("Error fetching data Tentang:", error);
         setError(error);
@@ -46,8 +46,8 @@ export default function Tentang() {
           <div className="container px-6 m-auto text-gray-600 md:px-12 xl:px-6">
             <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
               <div className="md:5/12 lg:w-5/12">
-                <Image
-                  src="/images/startup.png"
+                <img
+                  src={item.attributes.urlGambar}
                   alt="image"
                   loading="lazy"
                   width={200}
@@ -57,7 +57,7 @@ export default function Tentang() {
               </div>
               <div className="md:7/12 lg:w-6/12">
                 <h2 className="text-2xl font-bold text-gray-900 md:text-4xl">
-                  PT. Business Legal Solution
+                  {item.attributes.nama}
                 </h2>
                 <p className="mt-6 text-gray-600">{item.attributes.tentang}</p>
               </div>

@@ -20,7 +20,8 @@ export default function index() {
             Pemesanan Berhasil!
           </h3>
           <p className="my-2 text-gray-600">
-            Terimakasih Tim Kami Akan Segera Menghubungi Anda.
+            Terimakasih Tim Kami Akan Segera Menghubungi Anda. Untuk Informasi
+            Berkas Layanan..
           </p>
           <div className="py-10 text-center">
             <Link
