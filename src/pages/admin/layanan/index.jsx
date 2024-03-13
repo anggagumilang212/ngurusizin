@@ -231,11 +231,10 @@ const Layanan = ({ isLoggedIn }) => {
                           onClick={
                             () => setCurrentPage(firstPage + index) // Memperbarui halaman berdasarkan indeks dan halaman pertama yang ditampilkan
                           }
-                          className={`mx-1 px-3 py-1 rounded-md ${
-                            currentPage === firstPage + index
+                          className={`mx-1 px-3 py-1 rounded-md ${currentPage === firstPage + index
                               ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white"
                               : "bg-gray-200 hover:bg-gray-400"
-                          }`}
+                            }`}
                         >
                           {firstPage + index}{" "}
                           {/* Menggunakan halaman pertama yang ditampilkan */}

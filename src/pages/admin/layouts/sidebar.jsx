@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import NotificationDropdown from "@/components/layoutsAdmin/NotificationDropdown";
 import UserDropdown from "@/components/layoutsAdmin/UserDropdown";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import CekRole from "@/components/CekRole";
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
   const [cookies, setCookie] = useCookies(["token"]);
 
+  // akses berdasarkan role
+  const role = CekRole();
+
+  // SECTION Fungsi untuk menghapus cookie berdasarkan namanya
+  function deleteCookie(name) {
+    // Menetapkan tanggal kedaluwarsa yang sudah lewat
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
   const handleLogout = async () => {
     try {
       // Mendapatkan token JWT dari cookies
@@ -26,7 +35,8 @@ export default function Sidebar() {
       await axios.post("http://localhost:5000/api/auth/logout", null, config);
 
       // Hapus token JWT dari cookies setelah berhasil logout
-      setCookie("token", "", { path: "/" });
+      // setCookie("token", "", { path: "/" });
+      deleteCookie("token");
 
       // Redirect ke halaman login setelah logout
       router.push("/auth/login");
@@ -112,48 +122,56 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className="flex flex-col list-none md:flex-col md:min-w-full">
-              <li className="items-center">
-                <Link
-                  href={"/admin/dashboard"}
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/dashboard") !== -1
-                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
+              {role == 'affiliate' && (
+                <li className="items-center">
+                  <Link
+                    href={"/admin/dashboard"}
                     className={
-                      "fas fa-tv mr-2 text-sm " +
+                      "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/admin/dashboard") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                        ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                        : "text-blueGray-700 hover:text-blueGray-500")
                     }
-                  ></i>{" "}
-                  Dashboard
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link
-                  href={"/admin/layanan"}
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/layanan") !== -1
-                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
+                  >
+                    <i
+                      className={
+                        "fas fa-tv mr-2 text-sm " +
+                        (router.pathname.indexOf("/admin/dashboard") !== -1
+                          ? "opacity-75"
+                          : "text-blueGray-300")
+                      }
+                    ></i>{" "}
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+
+              {/* SECTION LAYANAN */}
+              {role == 'affiliate' && (
+                <li className="items-center">
+                  <Link
+                    href={"/admin/layanan"}
                     className={
-                      "fas fa-tools mr-2 text-sm " +
+                      "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/admin/layanan") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                        ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                        : "text-blueGray-700 hover:text-blueGray-500")
                     }
-                  ></i>{" "}
-                  Layanan
-                </Link>
-              </li>
+                  >
+                    <i
+                      className={
+                        "fas fa-tools mr-2 text-sm " +
+                        (router.pathname.indexOf("/admin/layanan") !== -1
+                          ? "opacity-75"
+                          : "text-blueGray-300")
+                      }
+                    ></i>{" "}
+                    Layanan
+                  </Link>
+                </li>
+              )}
+
+              {/* SECTION ORDER */}
               <li className="items-center">
                 <Link
                   href={"/admin/order"}
@@ -175,27 +193,31 @@ export default function Sidebar() {
                   Order
                 </Link>
               </li>
-              <li className="items-center">
-                <Link
-                  href={"/admin/tentang"}
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/tentang") !== -1
-                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
+
+              {/* SECTION BAR TENTANG */}
+              {role == 'affiliate' && (
+                <li className="items-center">
+                  <Link
+                    href={"/admin/tentang"}
                     className={
-                      "fas fa-address-card mr-2 text-sm " +
+                      "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/admin/tentang") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                        ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                        : "text-blueGray-700 hover:text-blueGray-500")
                     }
-                  ></i>{" "}
-                  Tentang
-                </Link>
-              </li>
+                  >
+                    <i
+                      className={
+                        "fas fa-address-card mr-2 text-sm " +
+                        (router.pathname.indexOf("/admin/tentang") !== -1
+                          ? "opacity-75"
+                          : "text-blueGray-300")
+                      }
+                    ></i>{" "}
+                    Tentang
+                  </Link>
+                </li>
+              )}
               {/* <li className="items-center">
                 <Link
                   href={"/admin/testimoni"}
@@ -217,27 +239,30 @@ export default function Sidebar() {
                   Testimoni
                 </Link>
               </li> */}
-              <li className="items-center">
-                <Link
-                  href={"/admin/administrators"}
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/administrators") !== -1
-                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
+              {/* SECTION ADMINISTRATORS */}
+              {role == 'affiliate' && (
+                <li className="items-center">
+                  <Link
+                    href={"/admin/administrators"}
                     className={
-                      "fas fa-users mr-2 text-sm " +
+                      "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/admin/administrators") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                        ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                        : "text-blueGray-700 hover:text-blueGray-500")
                     }
-                  ></i>{" "}
-                  administrators
-                </Link>
-              </li>
+                  >
+                    <i
+                      className={
+                        "fas fa-users mr-2 text-sm " +
+                        (router.pathname.indexOf("/admin/administrators") !== -1
+                          ? "opacity-75"
+                          : "text-blueGray-300")
+                      }
+                    ></i>{" "}
+                    administrators
+                  </Link>
+                </li>
+              )}
 
               <li className="items-center">
                 <button

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // components
 
@@ -7,8 +7,11 @@ import AdminNavbar from "@/components/layoutsAdmin/AdminNavbar.js";
 import HeaderStats from "@/components/layoutsAdmin/HeaderStats";
 import FooterAdmin from "@/components/layoutsAdmin/FooterAdmin";
 import Sidebar from "./sidebar";
+import CekAkses from "@/components/CekAkses";
 
 export default function AdminLayout({ children }) {
+  CekAkses();
+
   return (
     <>
       <Sidebar />

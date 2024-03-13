@@ -29,6 +29,7 @@ const Administrators = ({ isLoggedIn }) => {
     username: "",
     email: "",
     password: "",
+    role: "",
     phone: "",
   });
 
@@ -38,6 +39,7 @@ const Administrators = ({ isLoggedIn }) => {
     username: "",
     email: "",
     password: "",
+    role: "",
     phone: "",
   });
 
@@ -150,6 +152,7 @@ const Administrators = ({ isLoggedIn }) => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        role: formData.role,
         phone: formData.phone,
       };
 
@@ -169,6 +172,7 @@ const Administrators = ({ isLoggedIn }) => {
           username: "",
           email: "",
           password: "",
+          role: "",
           phone: "",
         });
         fetchData();
@@ -186,11 +190,15 @@ const Administrators = ({ isLoggedIn }) => {
       name: item.attributes.name,
       username: item.attributes.username,
       email: item.attributes.email,
-      password: "", // Kosongkan password untuk keperluan update
+      role: item.attributes.role,
+      password: '', // Kosongkan password untuk keperluan update
+      password_lama: item.attributes.password, // Kosongkan password untuk keperluan update
       phone: item.attributes.phone,
     });
     setShowUpdateModal(true);
   };
+
+  // console.log(updateData);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -208,7 +216,7 @@ const Administrators = ({ isLoggedIn }) => {
       );
 
       if (response.ok) {
-        showToastMessage("Data berhasil diupdate!");
+        showToastMessage("Data berhasil diupdate!");a
         setShowUpdateModal(false);
         fetchData();
       } else {
@@ -349,11 +357,10 @@ const Administrators = ({ isLoggedIn }) => {
                           onClick={
                             () => setCurrentPage(firstPage + index) // Memperbarui halaman berdasarkan indeks dan halaman pertama yang ditampilkan
                           }
-                          className={`mx-1 px-3 py-1 rounded-md ${
-                            currentPage === firstPage + index
-                              ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white"
-                              : "bg-gray-200 hover:bg-gray-400"
-                          }`}
+                          className={`mx-1 px-3 py-1 rounded-md ${currentPage === firstPage + index
+                            ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white"
+                            : "bg-gray-200 hover:bg-gray-400"
+                            }`}
                         >
                           {firstPage + index}{" "}
                           {/* Menggunakan halaman pertama yang ditampilkan */}
@@ -439,7 +446,7 @@ const Administrators = ({ isLoggedIn }) => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                    className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                     placeholder="Name"
                     required
                   />
@@ -457,7 +464,7 @@ const Administrators = ({ isLoggedIn }) => {
                       name="username"
                       value={formData.username}
                       onChange={handleChange}
-                      className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       placeholder="Username"
                       required
                     />
@@ -475,7 +482,7 @@ const Administrators = ({ isLoggedIn }) => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       placeholder="Email"
                       required
                     />
@@ -493,10 +500,26 @@ const Administrators = ({ isLoggedIn }) => {
                       name="password"
                       value={formData.password}
                       onChange={handleChange}
-                      className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       placeholder="Password"
                       required
                     />
+                  </div>
+                  <div>
+                    <label
+                      for="role"
+                      className="text-sm font-bold leading-tight tracking-normal text-gray-800"
+                    >
+                      Role
+                    </label>
+                    <select name="role" id="role"
+                      className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      onChange={handleChange}
+                    >
+                      <option value="">Pilih Role</option>
+                      <option value="affiliate">affiliate</option>
+                      <option value="merchant">merchant</option>
+                    </select>
                   </div>
                   <label
                     for="email2"
@@ -504,7 +527,7 @@ const Administrators = ({ isLoggedIn }) => {
                   >
                     Phone
                   </label>
-                  <div className="relative mt-2 mb-5">
+                  <div className="relative mt-2 mb-3">
                     <div className="absolute flex items-center h-full px-4 text-gray-600 border-r">
                       <i className="fas fa-phone"></i>
                     </div>
@@ -592,7 +615,7 @@ const Administrators = ({ isLoggedIn }) => {
                     onChange={(e) =>
                       setUpdateData({ ...updateData, name: e.target.value })
                     }
-                    className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                    className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                     placeholder="Name"
                   />
 
@@ -614,7 +637,7 @@ const Administrators = ({ isLoggedIn }) => {
                           username: e.target.value,
                         })
                       }
-                      className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       placeholder="Username"
                     />
                   </div>
@@ -633,7 +656,7 @@ const Administrators = ({ isLoggedIn }) => {
                       onChange={(e) =>
                         setUpdateData({ ...updateData, email: e.target.value })
                       }
-                      className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       placeholder="Email"
                     />
                   </div>
@@ -655,9 +678,28 @@ const Administrators = ({ isLoggedIn }) => {
                           password: e.target.value,
                         })
                       }
-                      className="flex items-center w-full h-10 pl-3 mt-2 mb-5 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      className="flex items-center w-full h-10 pl-3 mt-2 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       placeholder="Password"
                     />
+                    <small className="mb-3 text-xs text-[#000000]/50">Isi kolom password, bila ingin mengubah password sebelumnya</small>
+                  </div>
+                  <div>
+                    <label
+                      for="role"
+                      className="text-sm font-bold leading-tight tracking-normal text-gray-800"
+                    >
+                      Role
+                    </label>
+                    <select name="role" id="role"
+                      className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
+                      onChange={(e) => setUpdateData({
+                        ...updateData,
+                        role: e.target.value
+                      })}
+                    >
+                      <option value="affiliate" selected={updateData.role == 'affiliate' ? true : false}>affiliate</option>
+                      <option value="merchant" selected={updateData.role == 'merchant' ? true : false}>merchant</option>
+                    </select>
                   </div>
                   <label
                     for="email2"
@@ -665,7 +707,7 @@ const Administrators = ({ isLoggedIn }) => {
                   >
                     Phone
                   </label>
-                  <div className="relative mt-2 mb-5">
+                  <div className="relative mt-2 mb-3">
                     <div className="absolute flex items-center h-full px-4 text-gray-600 border-r">
                       <i className="fas fa-phone"></i>
                     </div>
