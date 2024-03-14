@@ -158,7 +158,7 @@ const Order = ({ isLoggedIn }) => {
   // Fungsi untuk mengirim pesan ke URL API
   const sendMessageToAPI = async (phoneNumber, message, Nama) => {
     try {
-      const response = await fetch("http://localhost:8000/send-message", {
+      const response = await fetch("https://wa.afkaaruna.sch.id/send-message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
