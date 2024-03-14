@@ -27,6 +27,27 @@ export default function Form() {
     }));
   }, [idLayanan]);
 
+  // Fungsi untuk mengirim pesan ke URL API
+  const sendMessageToAPI = async (phoneNumber, message, Nama) => {
+    try {
+      const response = await fetch("https://wa.afkaaruna.sch.id/send-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ number: phoneNumber, message, Nama }), // Menggunakan "number" untuk request body
+      });
+
+      if (response.ok) {
+        console.log("Pesan berhasil dikirim ke API.");
+      } else {
+        console.error("Gagal mengirim pesan ke API.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,6 +62,11 @@ export default function Form() {
 
       if (response.ok) {
         // console.log("Data berhasil dikirim!");
+
+        const message = `Hai! *${formData.nama.toUpperCase()}*,\nKami dari Team Izin aja .Id\nStatus Order Anda: *${formData.status.toUpperCase()}*\nMenunggu dokumen lengkap. Silakan kirimkan dokumen lengkap Anda di sini.`;
+        
+        await sendMessageToAPI(formData.phone, message); // Menggunakan nomor telepon yang sudah disimpan dalam updateData
+
         router.push("/layanan/success");
       } else {
         console.error("Gagal mengirim data.");
@@ -57,6 +83,7 @@ export default function Form() {
       [name]: value,
     }));
   };
+
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px] bg-white">
