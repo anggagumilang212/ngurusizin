@@ -17,7 +17,8 @@ export default function Sidebar() {
   // SECTION Fungsi untuk menghapus cookie berdasarkan namanya
   function deleteCookie(name) {
     // Menetapkan tanggal kedaluwarsa yang sudah lewat
-    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }
   const handleLogout = async () => {
     try {
@@ -122,7 +123,7 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className="flex flex-col list-none md:flex-col md:min-w-full">
-              {role == 'affiliate' && (
+              {/* {role == 'affiliate' && (
                 <li className="items-center">
                   <Link
                     href={"/admin/dashboard"}
@@ -144,10 +145,10 @@ export default function Sidebar() {
                     Dashboard
                   </Link>
                 </li>
-              )}
+              )} */}
 
               {/* SECTION LAYANAN */}
-              {role == 'affiliate' && (
+              {role == "affiliate" && (
                 <li className="items-center">
                   <Link
                     href={"/admin/layanan"}
@@ -195,7 +196,7 @@ export default function Sidebar() {
               </li>
 
               {/* SECTION BAR TENTANG */}
-              {role == 'affiliate' && (
+              {role == "affiliate" && (
                 <li className="items-center">
                   <Link
                     href={"/admin/tentang"}
@@ -240,7 +241,7 @@ export default function Sidebar() {
                 </Link>
               </li> */}
               {/* SECTION ADMINISTRATORS */}
-              {role == 'affiliate' && (
+              {role == "affiliate" && (
                 <li className="items-center">
                   <Link
                     href={"/admin/administrators"}

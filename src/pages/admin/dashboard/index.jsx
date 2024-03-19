@@ -41,7 +41,7 @@ export default function Dashboard({ isLoggedIn }) {
         <title>Dashboard</title>
       </Head>
       <AdminLayout>
-        <div className="flex flex-col gap-2 -mt-24 bg-white md:flex-row">
+        {/* <div className="flex flex-col gap-2 -mt-24 bg-white md:flex-row">
           {CardList.map((card, index) => (
             <div
               key={index}
@@ -56,7 +56,7 @@ export default function Dashboard({ isLoggedIn }) {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </AdminLayout>
     </>
   );
