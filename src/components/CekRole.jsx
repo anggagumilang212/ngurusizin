@@ -20,7 +20,7 @@ const CekRole = () => {
 
       try {
         const response = await axios.get(
-          "http://89.116.187.91:5000/api/auth/cekToken/",
+          "https://api.ngurusizin.online/api/auth/cekToken/",
           config
         );
 
