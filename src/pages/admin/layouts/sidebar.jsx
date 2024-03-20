@@ -33,7 +33,7 @@ export default function Sidebar() {
       };
 
       // Kirim permintaan logout dengan token JWT yang disertakan dalam header
-      await axios.post("http://localhost:5000/api/auth/logout", null, config);
+      await axios.post("https://api.ngurusizin.online/api/auth/logout", null, config);
 
       // Hapus token JWT dari cookies setelah berhasil logout
       // setCookie("token", "", { path: "/" });
