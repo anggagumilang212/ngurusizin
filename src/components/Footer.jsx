@@ -8,7 +8,7 @@ export default function Footer() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://89.116.187.91:5000/api/tentang");
+        const response = await fetch("https://api.ngurusizin.online/api/tentang");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
