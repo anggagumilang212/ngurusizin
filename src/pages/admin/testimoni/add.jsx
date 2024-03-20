@@ -24,7 +24,7 @@ export default function Add() {
       formDataToSend.append("gambar", formData.gambar); // Mengganti 'file' menjadi 'gambar'
       formDataToSend.append("nama", formData.nama);
       formDataToSend.append("jabatan", formData.jabatan);
-      const response = await fetch("http://localhost:5000/api/testimoni", {
+      const response = await fetch("https://api.ngurusizin.online/api/testimoni", {
         method: "POST",
         body: formDataToSend,
       });

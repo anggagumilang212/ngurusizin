@@ -28,7 +28,7 @@ export default function Add() {
       formDataToSend.append("nama", formData.nama);
       formDataToSend.append("lokasi", formData.lokasi);
       formDataToSend.append("email", formData.email);
-      const response = await fetch("http://89.116.187.91:5000/api/tentang", {
+      const response = await fetch("https://api.ngurusizin.online/api/tentang", {
         method: "POST",
         body: formDataToSend,
       });

@@ -15,7 +15,7 @@ export default function Layanan() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://89.116.187.91:5000/api/layanan?page=${currentPage}&pageSize=${pageSize}`
+          `https://api.ngurusizin.online/api/layanan?page=${currentPage}&pageSize=${pageSize}`
         );
         setLayanan(response.data.data.data);
         setTotalPages(response.data.totalPages);

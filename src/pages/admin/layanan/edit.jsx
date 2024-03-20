@@ -25,7 +25,7 @@ export default function Edit() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://89.116.187.91:5000/api/layanan/${id}`
+          `https://api.ngurusizin.online/api/layanan/${id}`
         );
         // console.log("API response:", response); // Log the entire API response
         if (!response.data.data || !response.data.data.attributes) {
@@ -83,7 +83,7 @@ export default function Edit() {
         formDataToSend.append("gambar", formData.gambar);
       }
 
-      const response = await fetch(`http://89.116.187.91:5000/api/layanan/${id}`, {
+      const response = await fetch(`https://api.ngurusizin.online/api/layanan/${id}`, {
         method: "PUT",
         body: formDataToSend,
       });

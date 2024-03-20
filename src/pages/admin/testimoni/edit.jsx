@@ -24,7 +24,7 @@ export default function Edit() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/testimoni/${id}`
+          `https://api.ngurusizin.online/api/testimoni/${id}`
         );
         // console.log("API response:", response); // Log the entire API response
         if (!response.data.data || !response.data.data.attributes) {

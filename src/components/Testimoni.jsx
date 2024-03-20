@@ -41,7 +41,7 @@ const Testimoni = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/testimoni");
+        const response = await axios.get("https://api.ngurusizin.online/api/testimoni");
         if (response.data && response.data.data.data) {
           setTestimoniData(response.data.data.data);
         } else {

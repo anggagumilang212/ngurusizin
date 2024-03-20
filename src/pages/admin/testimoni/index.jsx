@@ -21,7 +21,7 @@ const Testimoni = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/testimoni?page=${currentPage}&search=${searchTerm}`
+        `https://api.ngurusizin.online/api/testimoni?page=${currentPage}&search=${searchTerm}`
       );
       setTestimoni(response.data.data.data);
       setTotalPages(response.data.totalPages);
