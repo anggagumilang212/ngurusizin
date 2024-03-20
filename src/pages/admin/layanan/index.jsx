@@ -22,7 +22,7 @@ const Layanan = ({ isLoggedIn }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/layanan?page=${currentPage}`
+        `http://89.116.187.91:5000/api/layanan?page=${currentPage}`
       );
       setLayanan(response.data.data.data);
       setTotalPages(response.data.totalPages);
@@ -39,7 +39,7 @@ const Layanan = ({ isLoggedIn }) => {
   const fetchDataByKeyword = async (keyword) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/layanan?keyword=${keyword}`
+        `http://89.116.187.91:5000/api/layanan?keyword=${keyword}`
       );
       setLayanan(response.data.data.data);
       setTotalPages(response.data.totalPages);
@@ -72,7 +72,7 @@ const Layanan = ({ isLoggedIn }) => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5000/api/layanan/${id}`, {
+      const response = await fetch(`http://89.116.187.91:5000/api/layanan/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

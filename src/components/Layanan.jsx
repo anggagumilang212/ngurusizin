@@ -10,7 +10,7 @@ export default function Layanan() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/layanan");
+        const response = await axios.get("http://89.116.187.91:5000/api/layanan");
         setLayanan(response.data.data.data);
       } catch (error) {
         console.error("Error fetching data layanan:", error);

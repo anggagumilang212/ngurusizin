@@ -23,7 +23,7 @@ const Tentang = ({ isLoggedIn }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/tentang?page=${currentPage}&search=${searchTerm}`
+        `http://89.116.187.91:5000/api/tentang?page=${currentPage}&search=${searchTerm}`
       );
       setTentang(response.data.data.data);
       setTotalPages(response.data.totalPages);
@@ -47,7 +47,7 @@ const Tentang = ({ isLoggedIn }) => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5000/api/tentang/${id}`, {
+      const response = await fetch(`http://89.116.187.91:5000/api/tentang/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

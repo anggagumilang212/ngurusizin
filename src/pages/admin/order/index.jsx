@@ -49,7 +49,7 @@ const Order = ({ isLoggedIn }) => {
     let url = '';
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/order?page=${currentPage}&role=${role}`);
+      const response = await axios.get(`http://89.116.187.91:5000/api/order?page=${currentPage}&role=${role}`);
 
       console.log(response);
       setOrder(response.data.data.data);
@@ -67,7 +67,7 @@ const Order = ({ isLoggedIn }) => {
   const fetchDataByKeyword = async (keyword) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/order?keyword=${keyword}&role=${role}`
+        `http://89.116.187.91:5000/api/order?keyword=${keyword}&role=${role}`
       );
 
       // console.log(response);
@@ -121,7 +121,7 @@ const Order = ({ isLoggedIn }) => {
   const handleDelete = async () => {
     const id = itemIdToDelete;
     try {
-      const response = await fetch(`http://localhost:5000/api/order/${id}`, {
+      const response = await fetch(`http://89.116.187.91:5000/api/order/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -181,7 +181,7 @@ const Order = ({ isLoggedIn }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/order/${updateData.id}`,
+        `http://89.116.187.91:5000/api/order/${updateData.id}`,
         {
           method: "PUT",
           headers: {

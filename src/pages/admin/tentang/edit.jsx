@@ -26,7 +26,7 @@ export default function Edit() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/tentang/${id}`
+          `http://89.116.187.91:5000/api/tentang/${id}`
         );
         // console.log("API response:", response); // Log the entire API response
         if (!response.data.data || !response.data.data.attributes) {
@@ -86,7 +86,7 @@ export default function Edit() {
         formDataToSend.append("gambar", formData.gambar);
       }
 
-      const response = await fetch(`http://localhost:5000/api/tentang/${id}`, {
+      const response = await fetch(`http://89.116.187.91:5000/api/tentang/${id}`, {
         method: "PUT",
         body: formDataToSend,
       });
