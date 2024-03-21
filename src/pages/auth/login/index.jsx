@@ -33,7 +33,7 @@ export default function Login() {
       setCookie("token", response.data.token, { path: "/" });
 
       // Redirect ke halaman admin/dashboard
-      router.push("/admin/layanan");
+      router.push("/admin/order");
     } catch (error) {
       console.error("Login error:", error);
       // setError("Email atau password salah.");

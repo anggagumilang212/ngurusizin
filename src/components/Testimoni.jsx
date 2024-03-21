@@ -58,6 +58,9 @@ const Testimoni = () => {
     fetchData();
   }, []);
 
+  console.log('testimoni', testimoniData);
+  console.log('testimoni coba', testimonialData);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -72,24 +75,24 @@ const Testimoni = () => {
         Testimoni
       </h1>
       <Slider {...settings}>
-        {testimonialData.map((item) => (
-          <div key={item.id}>
+        {testimoniData.map((item, index) => (
+          <div key={index}>
             <section className="p-6">
               <div className="container max-w-xl mx-auto">
                 <div className="flex flex-col items-center w-full p-6 space-y-8 text-gray-900 bg-white rounded-md lg:h-full lg:p-8">
                   <img
-                    src={item.image}
+                    src={item.attributes.urlGambar}
                     alt="gambar"
                     className="w-20 h-20 bg-gray-500 rounded-full"
                     width={100}
                     height={100}
                   />
                   <blockquote className="max-w-lg text-lg italic font-medium text-center">
-                    {item.quote}
+                    {item.attributes.testimoni}
                   </blockquote>
                   <div className="text-center text-gray-900">
-                    <p>{item.author}</p>
-                    <p>{item.position}</p>
+                    <p>{item.attributes.nama}</p>
+                    <p>{item.attributes.jabatan}</p>
                   </div>
                 </div>
               </div>

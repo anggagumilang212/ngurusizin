@@ -46,7 +46,7 @@ const Testimoni = () => {
     }
     try {
       const response = await fetch(
-        `http://localhost:5000/api/testimoni/${id}`,
+        `https://api.ngurusizin.online/api/testimoni/${id}`,
         {
           method: "DELETE",
           headers: {

@@ -82,15 +82,13 @@ export default function Edit() {
         formDataToSend.append("gambar", formData.gambar);
       }
 
-      const response = await fetch(
-        `http://localhost:5000/api/testimoni/${id}`,
-        {
-          method: "PUT",
-          body: formDataToSend,
+      const response = await axios.put(`https://api.ngurusizin.online/api/testimoni/${id}`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-      );
+      });
 
-      if (response.ok) {
+      if (response.status == 200) {
         router.push("/admin/testimoni");
       } else {
         console.error("Gagal mengirim data.");

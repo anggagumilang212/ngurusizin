@@ -18,7 +18,6 @@ export default function Hero() {
             </span>
             Mudah & Anti Ribet
           </h1>
-
           <p className="mt-8 font-medium text-transparent bg-clip-text bg-gradient-to-br from-[#1B1B1B] from-20% via-[#1D1D1D] via-20% to-[#A8CF45]">
             ijin jalan,usaha nyaman...
           </p>

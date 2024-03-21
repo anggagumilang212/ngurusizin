@@ -42,7 +42,7 @@ export default function Sidebar() {
       // Redirect ke halaman login setelah logout
       router.push("/auth/login");
     } catch (error) {
-      console.error("Logout error:", error);
+      // console.error("Logout error:", error);
     }
   };
 
@@ -219,27 +219,30 @@ export default function Sidebar() {
                   </Link>
                 </li>
               )}
-              {/* <li className="items-center">
-                <Link
-                  href={"/admin/testimoni"}
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/testimoni") !== -1
-                      ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
+              {/* TESTIMONI */}
+              {role == "affiliate" && (
+                <li className="items-center">
+                  <Link
+                    href={"/admin/testimoni"}
                     className={
-                      "fas fa-comments mr-2 text-sm " +
+                      "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/admin/testimoni") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
+                        ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white rounded-lg px-4 py-2"
+                        : "text-blueGray-700 hover:text-blueGray-500")
                     }
-                  ></i>{" "}
-                  Testimoni
-                </Link>
-              </li> */}
+                  >
+                    <i
+                      className={
+                        "fas fa-comments mr-2 text-sm " +
+                        (router.pathname.indexOf("/admin/testimoni") !== -1
+                          ? "opacity-75"
+                          : "text-blueGray-300")
+                      }
+                    ></i>{" "}
+                    Testimoni
+                  </Link>
+                </li>
+              )}
               {/* SECTION ADMINISTRATORS */}
               {role == "affiliate" && (
                 <li className="items-center">

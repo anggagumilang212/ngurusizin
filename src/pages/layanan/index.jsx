@@ -66,8 +66,7 @@ export default function Layanan() {
         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 xl:grid-cols-2">
           {layanan.map((item) => {
             let partDeskripsi = item.attributes.deskripsi.split("\r\n");
-            // console.log('coba', partDeskripsi);
-            let deskripsi = partDeskripsi.filter((item) => item.trim() !== ""); // Remove empty strings
+            let deskripsi = partDeskripsi.filter((item) => item.trim() !== ""); // menghapus string yang kosong
 
             return (
               <div className="flex flex-col" key={item.id}>

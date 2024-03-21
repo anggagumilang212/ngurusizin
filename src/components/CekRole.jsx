@@ -28,10 +28,10 @@ const CekRole = () => {
           console.log("cekRole", response.data.role);
           setRole(response.data.role);
         } else {
-          console.error(response);
+          // console.error(response);
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         // error karena ngambil dari JWT lain
         if (error.response.data.error != null) {
           router.push("/auth/login");
