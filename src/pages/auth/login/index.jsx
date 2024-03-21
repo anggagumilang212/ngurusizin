@@ -114,7 +114,7 @@ export default function Login() {
           </form>
           <hr class="my-6 border-gray-300 w-full" />
 
-          <p class="mt-0">
+          {/* <p class="mt-0">
             Belum Punya Akun?
             <Link
               href={"/auth/register"}
@@ -122,7 +122,7 @@ export default function Login() {
             >
               Daftar
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </section>

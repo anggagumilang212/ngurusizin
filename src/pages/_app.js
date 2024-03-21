@@ -14,9 +14,9 @@ export default function App({ Component, pageProps, router }) {
 
   // Jika tidak berada di dalam folder admin, tampilkan Navbar dan Footer
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Head>
-        <title>Izin Aja.ID</title>
+        <title>Ngurus Izin</title>
       </Head>
       <NextTopLoader color="#A8CF45" />
       <Navbar />
