@@ -29,6 +29,7 @@ export default function Layanan() {
 
     fetchData();
   }, [currentPage]);
+  console.log(layanan);
 
   if (error) {
     return (
@@ -63,54 +64,62 @@ export default function Layanan() {
       </div>
       <div className="relative flex flex-col items-center justify-center lg:px-28">
         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 xl:grid-cols-2">
-          {layanan.map((item) => (
-            <div className="flex flex-col" key={item.id}>
-              <div className="p-4 bg-white shadow-md rounded-3xl">
-                <div className="flex-none lg:flex">
-                  <div className="w-full h-full mb-3 lg:h-48 lg:w-48 lg:mb-0">
-                    <img
-                      src={item.attributes.urlGambar}
-                      alt={item.attributes.nama}
-                      width={200}
-                      height={200}
-                      className="object-scale-down w-full rounded-2xl lg:object-cover lg:h-48"
-                    />
-                  </div>
-                  <div className="flex-auto py-2 ml-3 justify-evenly">
-                    <div className="flex flex-wrap ">
-                      {/* Placeholder Title */}
-                      <h2 className="flex-auto text-lg font-medium">
-                        {item.attributes.nama}
-                      </h2>
+          {layanan.map((item) => {
+            let partDeskripsi = item.attributes.deskripsi.split("\r\n");
+            // console.log('coba', partDeskripsi);
+            let deskripsi = partDeskripsi.filter((item) => item.trim() !== ""); // Remove empty strings
+
+            return (
+              <div className="flex flex-col" key={item.id}>
+                <div className="p-4 bg-white shadow-md rounded-3xl">
+                  <div className="flex-none lg:flex">
+                    <div className="w-full h-full mb-3 lg:h-48 lg:w-48 lg:mb-0">
+                      <img
+                        src={item.attributes.urlGambar}
+                        alt={item.attributes.nama}
+                        width={200}
+                        height={200}
+                        className="object-scale-down w-full rounded-2xl lg:object-cover lg:h-48"
+                      />
                     </div>
-
-                    {/* Placeholder Description */}
-                    <p className="mb-5 text-gray-500 max-w-80">
-                      {item.attributes.deskripsi}
-                    </p>
-
-                    <div className="flex space-x-3 text-sm font-medium">
-                      <div className="flex flex-auto space-x-3">
-                        {/* Placeholder Price */}
-                        <button className="inline-flex items-center px-4 py-2 mb-2 space-x-2 tracking-wider text-gray-600 bg-white border rounded-full shadow-sm md:mb-0 hover:bg-gray-100 ">
-                          <span>Rp.{item.attributes.harga}</span>
-                        </button>
+                    <div className="flex-auto py-2 ml-3 justify-evenly">
+                      <div className="flex flex-wrap ">
+                        {/* Placeholder Title */}
+                        <h2 className="flex-auto text-lg font-medium">
+                          {item.attributes.nama}
+                        </h2>
                       </div>
-                      {/* Placeholder Button */}
-                      <Link
-                        href={`/layanan/form?id=${item.id}`}
-                        className="px-5 py-2 mb-2 tracking-wider text-white bg-[#A8CF45] rounded-full shadow-sm md:mb-0 hover:bg-gray-800"
-                        type="button"
-                        aria-label="like"
-                      >
-                        Dapatkan
-                      </Link>
+
+                      {/* Placeholder Description */}
+                      <p className="mb-5 text-gray-500 max-w-80">
+                        {deskripsi.map((data, index) => (
+                          <p key={index}>{data}</p>
+                        ))}
+                      </p>
+
+                      <div className="flex space-x-3 text-sm font-medium">
+                        <div className="flex flex-auto space-x-3">
+                          {/* Placeholder Price */}
+                          <button className="inline-flex items-center px-4 py-2 mb-2 space-x-2 tracking-wider text-gray-600 bg-white border rounded-full shadow-sm md:mb-0 hover:bg-gray-100 ">
+                            <span>Rp.{item.attributes.harga}</span>
+                          </button>
+                        </div>
+                        {/* Placeholder Button */}
+                        <Link
+                          href={`/layanan/form?id=${item.id}`}
+                          className="px-5 py-2 mb-2 tracking-wider text-white bg-[#A8CF45] rounded-full shadow-sm md:mb-0 hover:bg-gray-800"
+                          type="button"
+                          aria-label="like"
+                        >
+                          Dapatkan
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         {/* pagination */}
         <div className="flex justify-center gap-5 my-4">
