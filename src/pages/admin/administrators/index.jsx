@@ -46,7 +46,7 @@ const Administrators = ({ isLoggedIn }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/administrators?page=${currentPage}`
+        `https://api.ngurusizin.online/api/administrators?page=${currentPage}`
       );
       setAdministrators(response.data.data.data);
       setTotalPages(response.data.totalPages);
@@ -63,7 +63,7 @@ const Administrators = ({ isLoggedIn }) => {
   const fetchDataByKeyword = async (keyword) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/administrators?keyword=${keyword}`
+        `https://api.ngurusizin.online/api/administrators?keyword=${keyword}`
       );
       setAdministrators(response.data.data.data);
       setTotalPages(response.data.totalPages);
@@ -106,7 +106,7 @@ const Administrators = ({ isLoggedIn }) => {
     const id = itemIdToDelete;
     try {
       const response = await fetch(
-        `http://localhost:5000/api/administrators/${id}`,
+        `https://api.ngurusizin.online/api/administrators/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -156,13 +156,16 @@ const Administrators = ({ isLoggedIn }) => {
         phone: formData.phone,
       };
 
-      const response = await fetch("http://localhost:5000/api/administrators", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formDataToSend),
-      });
+      const response = await fetch(
+        "https://api.ngurusizin.online/api/administrators",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formDataToSend),
+        }
+      );
 
       if (response.ok) {
         showToastMessage("Data berhasil ditambahkan!");
@@ -191,7 +194,7 @@ const Administrators = ({ isLoggedIn }) => {
       username: item.attributes.username,
       email: item.attributes.email,
       role: item.attributes.role,
-      password: '', // Kosongkan password untuk keperluan update
+      password: "", // Kosongkan password untuk keperluan update
       password_lama: item.attributes.password, // Kosongkan password untuk keperluan update
       phone: item.attributes.phone,
     });
@@ -205,7 +208,7 @@ const Administrators = ({ isLoggedIn }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/administrators/${updateData.id}`,
+        `https://api.ngurusizin.online/api/administrators/${updateData.id}`,
         {
           method: "PUT",
           headers: {
@@ -216,7 +219,8 @@ const Administrators = ({ isLoggedIn }) => {
       );
 
       if (response.ok) {
-        showToastMessage("Data berhasil diupdate!");a
+        showToastMessage("Data berhasil diupdate!");
+        a;
         setShowUpdateModal(false);
         fetchData();
       } else {
@@ -357,10 +361,11 @@ const Administrators = ({ isLoggedIn }) => {
                           onClick={
                             () => setCurrentPage(firstPage + index) // Memperbarui halaman berdasarkan indeks dan halaman pertama yang ditampilkan
                           }
-                          className={`mx-1 px-3 py-1 rounded-md ${currentPage === firstPage + index
-                            ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white"
-                            : "bg-gray-200 hover:bg-gray-400"
-                            }`}
+                          className={`mx-1 px-3 py-1 rounded-md ${
+                            currentPage === firstPage + index
+                              ? "bg-gradient-to-r from-indigo-400 to-gray-600 text-white"
+                              : "bg-gray-200 hover:bg-gray-400"
+                          }`}
                         >
                           {firstPage + index}{" "}
                           {/* Menggunakan halaman pertama yang ditampilkan */}
@@ -512,7 +517,9 @@ const Administrators = ({ isLoggedIn }) => {
                     >
                       Role
                     </label>
-                    <select name="role" id="role"
+                    <select
+                      name="role"
+                      id="role"
                       className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       onChange={handleChange}
                     >
@@ -681,7 +688,10 @@ const Administrators = ({ isLoggedIn }) => {
                       className="flex items-center w-full h-10 pl-3 mt-2 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
                       placeholder="Password"
                     />
-                    <small className="mb-3 text-xs text-[#000000]/50">Isi kolom password, bila ingin mengubah password sebelumnya</small>
+                    <small className="mb-3 text-xs text-[#000000]/50">
+                      Isi kolom password, bila ingin mengubah password
+                      sebelumnya
+                    </small>
                   </div>
                   <div>
                     <label
@@ -690,15 +700,29 @@ const Administrators = ({ isLoggedIn }) => {
                     >
                       Role
                     </label>
-                    <select name="role" id="role"
+                    <select
+                      name="role"
+                      id="role"
                       className="flex items-center w-full h-10 pl-3 mt-2 mb-3 text-sm font-normal text-gray-600 border border-gray-300 rounded focus:outline-none focus:border focus:border-indigo-700"
-                      onChange={(e) => setUpdateData({
-                        ...updateData,
-                        role: e.target.value
-                      })}
+                      onChange={(e) =>
+                        setUpdateData({
+                          ...updateData,
+                          role: e.target.value,
+                        })
+                      }
                     >
-                      <option value="affiliate" selected={updateData.role == 'affiliate' ? true : false}>affiliate</option>
-                      <option value="merchant" selected={updateData.role == 'merchant' ? true : false}>merchant</option>
+                      <option
+                        value="affiliate"
+                        selected={updateData.role == "affiliate" ? true : false}
+                      >
+                        affiliate
+                      </option>
+                      <option
+                        value="merchant"
+                        selected={updateData.role == "merchant" ? true : false}
+                      >
+                        merchant
+                      </option>
                     </select>
                   </div>
                   <label
