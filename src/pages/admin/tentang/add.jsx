@@ -28,17 +28,18 @@ export default function Add() {
       formDataToSend.append("nama", formData.nama);
       formDataToSend.append("lokasi", formData.lokasi);
       formDataToSend.append("email", formData.email);
-      const response = await fetch("https://api.ngurusizin.online/api/tentang", {
-        method: "POST",
-        body: formDataToSend,
+      const response = await axios.post("https://api.ngurusizin.online/api/tentang", formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        } 
       });
 
-      if (response.ok) {
+      if (response.status == 201) {
         // console.log("Data berhasil di tambahkan!");
         // tambahkan logika lainnya sesuai kebutuhan, seperti mereset form atau menampilkan pesan sukses
         router.push("/admin/tentang");
       } else {
-        console.error("Gagal mengirim data.");
+        console.error("Gagal mengirim data.", response);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -116,7 +117,7 @@ export default function Add() {
                 phone
               </label>
               <input
-                type="number"
+                type="text"
                 name="phone"
                 id="phone"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"

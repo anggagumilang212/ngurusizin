@@ -210,7 +210,7 @@ const Layanan = ({ isLoggedIn }) => {
                     ))}
                   </tbody>
                 </table>
-                <h1>Total Layanan: {totalCount}</h1>
+             
                 {/* pagination */}
                 <div className="flex justify-center gap-5 my-4">
                   <button

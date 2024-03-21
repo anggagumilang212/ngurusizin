@@ -76,19 +76,24 @@ export default function Edit() {
       formDataToSend.append("deskripsi", formData.deskripsi);
       formDataToSend.append("harga", formData.harga);
       formDataToSend.append("nama", formData.nama);
-      formDataToSend.append("status", formData.status);
+      // formDataToSend.append("status", formData.status);
 
       // Jika ada gambar baru, tambahkan ke formDataToSend
       if (formData.gambar) {
         formDataToSend.append("gambar", formData.gambar);
       }
 
-      const response = await fetch(`https://api.ngurusizin.online/api/layanan/${id}`, {
-        method: "PUT",
-        body: formDataToSend,
-      });
+      const response = await axios.put(
+        `https://api.ngurusizin.online/api/layanan/${id}`,
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      if (response.ok) {
+      if (response.status == 200) {
         router.push("/admin/layanan");
       } else {
         console.error("Gagal mengirim data.");

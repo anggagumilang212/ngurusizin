@@ -26,19 +26,20 @@ export default function Add() {
       formDataToSend.append("harga", formData.harga);
       formDataToSend.append("gambar", formData.gambar); // Mengganti 'file' menjadi 'gambar'
       formDataToSend.append("nama", formData.nama);
-      formDataToSend.append("status", formData.status);
-      const response = await fetch("https://api.ngurusizin.online/api/layanan", {
-        method: "POST",
-        body: formDataToSend,
+      // formDataToSend.append("status", formData.status);
+      const response = await axios.post("https://api.ngurusizin.online/api/layanan", formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
-      if (response.ok) {
+      if (response.status == 201) {
         // console.log("Data berhasil di tambahkan.");
         showToastMessage();
         // tambahkan logika lainnya sesuai kebutuhan, seperti mereset form atau menampilkan pesan sukses
         router.push("/admin/layanan");
       } else {
-        console.error("Gagal mengirim data.");
+        console.error("Gagal mengirim data", response);
       }
     } catch (error) {
       console.error("Error:", error);

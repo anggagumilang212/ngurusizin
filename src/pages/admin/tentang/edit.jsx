@@ -86,15 +86,16 @@ export default function Edit() {
         formDataToSend.append("gambar", formData.gambar);
       }
 
-      const response = await fetch(`https://api.ngurusizin.online/api/tentang/${id}`, {
-        method: "PUT",
-        body: formDataToSend,
+      const response = await axios.put(`https://api.ngurusizin.online/api/tentang/${id}`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
       });
 
-      if (response.ok) {
+      if (response.status == 200) {
         router.push("/admin/tentang");
       } else {
-        console.error("Gagal mengirim data.");
+        console.error("Gagal mengirim data.", response);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -153,7 +154,7 @@ export default function Edit() {
                 Phone
               </label>
               <input
-                type="number"
+                type="text"
                 name="phone"
                 id="phone"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
