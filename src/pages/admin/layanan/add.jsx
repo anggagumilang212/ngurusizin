@@ -27,11 +27,15 @@ export default function Add() {
       formDataToSend.append("gambar", formData.gambar); // Mengganti 'file' menjadi 'gambar'
       formDataToSend.append("nama", formData.nama);
       // formDataToSend.append("status", formData.status);
-      const response = await axios.post("https://api.ngurusizin.online/api/layanan", formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      const response = await axios.post(
+        "https://api.ngurusizin.online/api/layanan",
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
+      );
 
       if (response.status == 201) {
         // console.log("Data berhasil di tambahkan.");
@@ -65,7 +69,7 @@ export default function Add() {
   };
 
   const showToastMessage = () => {
-    toast.success("Item berhasil ditamb", {
+    toast.success("Item berhasil ditambahkan", {
       position: "top-right",
     });
   };

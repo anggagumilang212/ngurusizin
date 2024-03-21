@@ -30,13 +30,16 @@ export default function Form() {
   // Fungsi untuk mengirim pesan ke URL API
   const sendMessageToAPI = async (phoneNumber, message, Nama) => {
     try {
-      const response = await fetch("https://wa.afkaaruna.sch.id/send-message", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ number: phoneNumber, message, Nama }), // Menggunakan "number" untuk request body
-      });
+      const response = await fetch(
+        "https://wa.ngurusizin.online/send-message",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ number: phoneNumber, message, Nama }), // Menggunakan "number" untuk request body
+        }
+      );
 
       if (response.ok) {
         console.log("Pesan berhasil dikirim ke API.");
@@ -52,7 +55,7 @@ export default function Form() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/order", {
+      const response = await fetch("https://api.ngurusizin.online/api/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +67,7 @@ export default function Form() {
         // console.log("Data berhasil dikirim!");
 
         const message = `Hai! *${formData.nama.toUpperCase()}*,\nKami dari Team Izin aja .Id\nStatus Order Anda: *${formData.status.toUpperCase()}*\nMenunggu dokumen lengkap. Silakan kirimkan dokumen lengkap Anda di sini.`;
-        
+
         await sendMessageToAPI(formData.phone, message); // Menggunakan nomor telepon yang sudah disimpan dalam updateData
 
         router.push("/layanan/success");
