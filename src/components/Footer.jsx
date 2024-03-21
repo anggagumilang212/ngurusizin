@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import axios from "axios";
 export default function Footer() {
   const [Tentang, setTentang] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -8,8 +9,8 @@ export default function Footer() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/tentang");
-        if (!response.ok) {
+        const response = await axios.get("https://api.ngurusizin.online/api/tentang");
+        if (!response.status==200) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();

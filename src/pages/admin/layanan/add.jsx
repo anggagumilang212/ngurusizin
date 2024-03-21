@@ -65,7 +65,7 @@ export default function Add() {
   };
 
   const showToastMessage = () => {
-    toast.success("Item berhasil dihapus", {
+    toast.success("Item berhasil ditamb", {
       position: "top-right",
     });
   };
