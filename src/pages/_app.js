@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import NextTopLoader from "nextjs-toploader";
 import "@/styles/tailwind.css";
 import Head from "next/head";
+import ButtonWa from "@/components/elements/ButtonWa";
 export default function App({ Component, pageProps, router }) {
   const isInsideAdmin = router.pathname.startsWith("/admin");
 
@@ -21,6 +22,7 @@ export default function App({ Component, pageProps, router }) {
       <NextTopLoader color="#A8CF45" />
       <Navbar />
       <Component {...pageProps} />
+      <ButtonWa/>
       <Footer />
     </div>
   );

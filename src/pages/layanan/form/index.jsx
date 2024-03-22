@@ -88,7 +88,7 @@ export default function Form() {
   };
 
   return (
-    <div className="flex items-center justify-center p-12">
+    <div className="flex items-center justify-center">
       <div className="mx-auto w-full max-w-[550px] bg-white">
         <form className="py-6 px-9" onSubmit={handleSubmit}>
           <input type="hidden" name="layananId" value={idLayanan} />
