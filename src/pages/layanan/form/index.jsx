@@ -1,3 +1,4 @@
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -30,18 +31,16 @@ export default function Form() {
   // Fungsi untuk mengirim pesan ke URL API
   const sendMessageToAPI = async (phoneNumber, message, Nama) => {
     try {
-      const response = await fetch(
-        "https://wa.ngurusizin.online/send-message",
+      const response = await axios.post(
+        "https://wa.ngurusizin.online/send-message", JSON.stringify({ number: phoneNumber, message, Nama }),
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ number: phoneNumber, message, Nama }), // Menggunakan "number" untuk request body
+          }, // Menggunakan "number" untuk request body
         }
       );
 
-      if (response.ok) {
+      if (response.status === 200) {
         console.log("Pesan berhasil dikirim ke API.");
       } else {
         console.error("Gagal mengirim pesan ke API.");
@@ -55,15 +54,13 @@ export default function Form() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://api.ngurusizin.online/api/order", {
-        method: "POST",
+      const response = await axios.post("https://api.ngurusizin.online/api/order", JSON.stringify(formData),{
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         // console.log("Data berhasil dikirim!");
 
         const message = `Hai! *${formData.nama.toUpperCase()}*,\nKami dari Team Izin aja .Id\nStatus Order Anda: *${formData.status.toUpperCase()}*\nMenunggu dokumen lengkap. Silakan kirimkan dokumen lengkap Anda di sini.`;
@@ -103,6 +100,7 @@ export default function Form() {
               type="text"
               name="nama"
               id="nama"
+              placeholder="Masukan Nama"
               className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               value={formData.nama}
               onChange={handleInputChange}
@@ -121,6 +119,7 @@ export default function Form() {
               id="domisili"
               value={formData.domisili}
               onChange={handleInputChange}
+              placeholder="Domisili"
               className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
           </div>
@@ -138,6 +137,7 @@ export default function Form() {
               value={formData.phone}
               onChange={handleInputChange}
               id="phone"
+              placeholder="08xxxxxxx"
               className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
           </div>
